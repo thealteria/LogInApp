@@ -34,9 +34,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(" CREATE TABLE " + USER_TABLE +
-                "(" + COLUMN_NAME + " TEXT," + COLUMN_USERNAME + " TEXT,"
-                + COLUMN_PASSWORD + " TEXT," + COLUMN_CNFRMPASS + " TEXT" + ");");
+        db.execSQL(" CREATE " + USER_TABLE +
+                "(name TEXT, username TEXT, password TEXT, cnfrmpassword TEXT)");
     }
 
     @Override
@@ -77,15 +76,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-   /* public Cursor getUser(String username, String password) {
+   /*public Cursor getUser(String username, String password) {
 
         String selectQuery = "SELECT * FROM  " + USER_TABLE + " WHERE " +
                 COLUMN_USERNAME + " = " + username + " " + " AND "
                 + COLUMN_PASSWORD + " = " + password + " ";
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        return cursor;
+        SQLiteDatabase db = this.getWritableDatabase();
+       return db.rawQuery(selectQuery, null);
     }*/
+
+   public Cursor getData(){
+       SQLiteDatabase db = this.getWritableDatabase();
+       return db.rawQuery("SELECT * FROM " + USER_TABLE, null);
+   }
 }

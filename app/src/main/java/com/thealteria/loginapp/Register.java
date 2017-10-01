@@ -44,14 +44,13 @@ public class Register extends AppCompatActivity {
         if(!pass.getText().toString().equals(cnfrmpass.getText().toString()))
         {
             Toast.makeText(getApplicationContext(), "Confirm Password does not match", Toast.LENGTH_LONG).show();
-            return;
         }
         else {
             boolean isInserted = dbHelper.addUser(name.getText().toString(),
                     user.getText().toString(), pass.getText().toString(),
                     cnfrmpass.getText().toString());
 
-            Intent intent = new Intent(Register.this, Login.class);
+            Intent intent = new Intent(Register.this, LoginMainPage.class);
             startActivity(intent);
 
             if (isInserted)

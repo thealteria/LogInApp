@@ -1,6 +1,7 @@
 package com.thealteria.loginapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,16 +42,18 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Cursor res = dbHelper.getData();
 
-                String storedPassword = dbHelper.getSingleEntry(username1.getText().toString());
+                //String user = username1.getText().toString();
 
-                if(pass.equals(storedPassword)){
+                //String storedPassword = dbHelper.getSingleEntry(user);
+                if (username1.equals(res.getString(1)) && pass.equals(res.getString(2))) {
 
-                    Toast.makeText(Login.this, "Login ho gya bc!",
-                            Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Login.this, LoginMainPage.class);
-                    startActivity(intent);
-                }
+                            Toast.makeText(Login.this, "Login ho gya bc!",
+                                    Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Login.this, LoginMainPage.class);
+                            startActivity(intent);
+                        }
 
                 else {
                     Toast.makeText(Login.this, "Login ni hua bc!",
