@@ -2,6 +2,7 @@ package com.thealteria.loginapp;
 
 import android.content.Intent;
 import android.renderscript.ScriptGroup;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
-    EditText name, user, pass, cnfrmpass;
+    TextInputEditText name, user1, pass, cnfrmpass;
     Button signin;
     DBHelper dbHelper;
 
@@ -24,17 +25,17 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         dbHelper = new DBHelper(this);
 
-        name = (EditText) findViewById(R.id.name);
-        pass = (EditText) findViewById(R.id.password);
-        cnfrmpass = (EditText) findViewById(R.id.cnfrmpassword);
-        user = (EditText) findViewById(R.id.user);
+        name = (TextInputEditText) findViewById(R.id.name);
+        pass = (TextInputEditText) findViewById(R.id.password);
+        cnfrmpass = (TextInputEditText) findViewById(R.id.cnfrmpassword);
+        user1 = (TextInputEditText) findViewById(R.id.user);
         signin = (Button) findViewById(R.id.signin);
     }
 
     public void signinBtn(View view) {
 
         if(name.getText().toString().equals("")||
-        user.getText().toString().equals("")||
+        user1.getText().toString().equals("")||
                 pass.getText().toString().equals("")||cnfrmpass.getText().toString().equals(""))
         {
             Toast.makeText(getApplicationContext(), "Please Enter Your Details", Toast.LENGTH_LONG).show();
@@ -46,18 +47,14 @@ public class Register extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Confirm Password does not match", Toast.LENGTH_LONG).show();
         }
         else {
-            boolean isInserted = dbHelper.addUser(name.getText().toString(),
-                    user.getText().toString(), pass.getText().toString(),
+            dbHelper.addUser(name.getText().toString(),
+                    user1.getText().toString(), pass.getText().toString(),
                     cnfrmpass.getText().toString());
 
-            Intent intent = new Intent(Register.this, LoginMainPage.class);
+            Toast.makeText(Register.this, "Data Inserted", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(Register.this, Login.class);
             startActivity(intent);
-
-            if (isInserted)
-                Toast.makeText(Register.this, "Data Inserted", Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(Register.this, "Data not Inserted", Toast.LENGTH_LONG).show();
-
         }
 
     }

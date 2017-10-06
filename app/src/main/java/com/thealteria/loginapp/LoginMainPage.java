@@ -1,5 +1,6 @@
 package com.thealteria.loginapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class LoginMainPage extends AppCompatActivity {
 
     Button view;
+    int k = 0;
     DBHelper dbHelper;
     TextView show;
     EditText user, pass;
@@ -47,5 +49,20 @@ public class LoginMainPage extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onBackPressed()
+    {
+        k++;
+        if(k == 1)
+        {
+            Toast.makeText(LoginMainPage.this, "Press again to go previous activity.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginMainPage.this, Login.class);
+            startActivity(intent);
+        }
+        else
+        {
+            finish();
+        }
     }
 }

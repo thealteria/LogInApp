@@ -15,7 +15,7 @@
         android:layout_marginTop="25dp"
         android:orientation="vertical">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:maxLines="1"
             android:singleLine="true" />
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:maxLines="1"
             android:singleLine="true" />
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:maxLines="1"
             android:singleLine="true" />
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/cnfrmpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package com.thealteria.loginapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,9 @@ import org.w3c.dom.Text;
 
 public class Login extends AppCompatActivity {
 
-    EditText username1, pass;
+    TextInputEditText username1, pass;
     Button login;
+    Cursor cursor;
     TextView attempt, atpCnt1;
     int atpCnt = 5;
     int k = 0;
@@ -30,8 +32,8 @@ public class Login extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
 
-        username1 = (EditText)findViewById(R.id.luser);
-        pass = (EditText)findViewById(R.id.lpass);
+        username1 = (TextInputEditText) findViewById(R.id.luser);
+        pass = (TextInputEditText) findViewById(R.id.lpass);
         attempt = (TextView)findViewById(R.id.attempt);
         atpCnt1 = (TextView)findViewById(R.id.attemptCount);
 
@@ -42,27 +44,32 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cursor res = dbHelper.getData();
 
-                //String user = username1.getText().toString();
+                cursor = db.rawQuery("SELECT * FROM " + DBHelper.USER_TABLE + " WHERE "
+                                + DBHelper.COLUMN_USERNAME + " =? AND " + DBHelper.COLUMN_PASSWORD + " =?",
+                        new String[]{username1.getText().toString(), pass.getText().toString()});
 
-                //String storedPassword = dbHelper.getSingleEntry(user);
-                if (username1.equals(res.getString(1)) && pass.equals(res.getString(2))) {
+                if (cursor != null) {
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        String username = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_USERNAME));
+                        String name = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PASSWORD));
 
-                            Toast.makeText(Login.this, "Login ho gya bc!",
-                                    Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Login.this, LoginMainPage.class);
-                            startActivity(intent);
+                        Toast.makeText(Login.this, "Login ho gya bc!",
+                                Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Login.this, LoginMainPage.class);
+                        intent.putExtra("Username", username);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Login.this, "Login ni hua bc!",
+                                Toast.LENGTH_LONG).show();
+                        atpCnt--;
+                        attempt.setText(Integer.toString(atpCnt));
+                        ;
+
+                        if (atpCnt == 0) {
+                            login.setEnabled(false);
                         }
-
-                else {
-                    Toast.makeText(Login.this, "Login ni hua bc!",
-                            Toast.LENGTH_LONG).show();
-                    atpCnt--;
-                    attempt.setText(Integer.toString(atpCnt));;
-
-                    if(atpCnt==0){
-                        login.setEnabled(false);
                     }
                 }
             }

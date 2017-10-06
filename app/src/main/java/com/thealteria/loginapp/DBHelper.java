@@ -3,6 +3,7 @@ package com.thealteria.loginapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -21,22 +22,26 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "singin.db";
 
     public static final String USER_TABLE = "users";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_CNFRMPASS = "cnfrmpassword";
 
-    public  SQLiteDatabase db;
+    public  SQLiteDatabase db ;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, 1);
     }
 
+    private String CREATE_TABLE = " CREATE " + USER_TABLE +
+            "(" + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT. " + COLUMN_NAME + "TEXT," + COLUMN_USERNAME + "TEXT," +
+            COLUMN_PASSWORD + "TEXT," + COLUMN_CNFRMPASS + "TEXT" +")";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(" CREATE " + USER_TABLE +
-                "(name TEXT, username TEXT, password TEXT, cnfrmpassword TEXT)");
-    }
+        db.execSQL(CREATE_TABLE);    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -46,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /* Storing User details*/
 
-    public boolean addUser(String name, String username, String password, String cnfrmpassword) {
+    public void addUser(String name, String username, String password, String cnfrmpassword) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -55,36 +60,34 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD, password);
         values.put(COLUMN_CNFRMPASS, cnfrmpassword);
 
-        long result = db.insert(USER_TABLE, null, values);
+        db.insert(USER_TABLE, null, values);
         db.close();
-
-        return result != -1;
-    }
-
-    public String getSingleEntry(String userName)
-    {
-        Cursor cursor= db.query(USER_TABLE, null, "username=?", new String[]{userName}, null, null, null);
-        if(cursor.getCount()<1) // UserName Not Exist
-        {
-            cursor.close();
-            return "NOT EXIST...!!!";
         }
-        cursor.moveToFirst();
-        String password= cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD));
-        cursor.close();
-        return "Password="+password;
 
+
+    public void retrieveData()
+    {
+        String[] columns = {
+
+                DBHelper.COLUMN_ID,
+                DBHelper.COLUMN_NAME,
+                DBHelper.COLUMN_USERNAME,
+                DBHelper.COLUMN_PASSWORD,
+                DBHelper.COLUMN_CNFRMPASS
+        };
+
+        Cursor cursor = db.query(DBHelper.USER_TABLE, columns, null, null, null, null, null, null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+
+                int id = cursor.getInt(cursor.getColumnIndex(DBHelper.COLUMN_ID));
+                String name = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_NAME));
+                String username = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_USERNAME));
+                String pass = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PASSWORD));
+                String cnfrmpass = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_CNFRMPASS));
+            }
+        }
     }
-
-   /*public Cursor getUser(String username, String password) {
-
-        String selectQuery = "SELECT * FROM  " + USER_TABLE + " WHERE " +
-                COLUMN_USERNAME + " = " + username + " " + " AND "
-                + COLUMN_PASSWORD + " = " + password + " ";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-       return db.rawQuery(selectQuery, null);
-    }*/
 
    public Cursor getData(){
        SQLiteDatabase db = this.getWritableDatabase();
