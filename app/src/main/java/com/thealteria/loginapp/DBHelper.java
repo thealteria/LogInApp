@@ -22,7 +22,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "singin.db";
 
     public static final String USER_TABLE = "users";
-    public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
@@ -34,13 +33,12 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, 1);
     }
 
-    private String CREATE_TABLE = " CREATE " + USER_TABLE +
-            "(" + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT. " + COLUMN_NAME + "TEXT," + COLUMN_USERNAME + "TEXT," +
-            COLUMN_PASSWORD + "TEXT," + COLUMN_CNFRMPASS + "TEXT" +")";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE);    }
+        db.execSQL(" CREATE TABLE " + USER_TABLE +
+                "(" + COLUMN_NAME + " TEXT, " + COLUMN_USERNAME + " TEXT, " +
+                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT " +")");    }
 
 
     @Override
@@ -69,7 +67,6 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         String[] columns = {
 
-                DBHelper.COLUMN_ID,
                 DBHelper.COLUMN_NAME,
                 DBHelper.COLUMN_USERNAME,
                 DBHelper.COLUMN_PASSWORD,
@@ -80,7 +77,6 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
 
-                int id = cursor.getInt(cursor.getColumnIndex(DBHelper.COLUMN_ID));
                 String name = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_NAME));
                 String username = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_USERNAME));
                 String pass = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PASSWORD));
