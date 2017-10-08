@@ -62,29 +62,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         }
 
-
-    public void retrieveData()
-    {
-        String[] columns = {
-
-                DBHelper.COLUMN_NAME,
-                DBHelper.COLUMN_USERNAME,
-                DBHelper.COLUMN_PASSWORD,
-                DBHelper.COLUMN_CNFRMPASS
-        };
-
-        Cursor cursor = db.query(DBHelper.USER_TABLE, columns, null, null, null, null, null, null);
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-
-                String name = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_NAME));
-                String username = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_USERNAME));
-                String pass = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PASSWORD));
-                String cnfrmpass = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_CNFRMPASS));
-            }
-        }
-    }
-
    public Cursor getData(){
        SQLiteDatabase db = this.getWritableDatabase();
        return db.rawQuery("SELECT * FROM " + USER_TABLE, null);

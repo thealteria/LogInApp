@@ -6,8 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ public class Login extends AppCompatActivity {
     Button login;
     Cursor cursor;
     TextView attempt, atpCnt1;
+    CheckBox show;
     int atpCnt = 5;
     int k = 0;
     DBHelper dbHelper;
@@ -34,12 +38,16 @@ public class Login extends AppCompatActivity {
 
         username1 = (TextInputEditText) findViewById(R.id.luser);
         pass = (TextInputEditText) findViewById(R.id.lpass);
+        show = (CheckBox) findViewById(R.id.showPass);
         attempt = (TextView)findViewById(R.id.attempt);
         atpCnt1 = (TextView)findViewById(R.id.attemptCount);
 
         atpCnt1.setText(Integer.toString(atpCnt));
 
         login = (Button)findViewById(R.id.login);
+        showPass();
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,26 +57,31 @@ public class Login extends AppCompatActivity {
                                 + DBHelper.COLUMN_USERNAME + " =? AND " + DBHelper.COLUMN_PASSWORD + " =?",
                         new String[]{username1.getText().toString(), pass.getText().toString()});
 
+                if(username1.getText().toString().equals("")||
+                        pass.getText().toString().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "Username and Password can't be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if (cursor != null) {
                     if (cursor.getCount() > 0) {
                         cursor.moveToFirst();
-                        String username = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_USERNAME));
-                        String name = cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_PASSWORD));
 
                         Toast.makeText(Login.this, "Login ho gya bc!",
                                 Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(Login.this, LoginMainPage.class);
-                        intent.putExtra("Username", username);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(Login.this, "Login ni hua bc!",
-                                Toast.LENGTH_LONG).show();
                         atpCnt--;
-                        attempt.setText(Integer.toString(atpCnt));
-                        ;
+                        Toast.makeText(Login.this, "Login ni hua bc!",
+                                Toast.LENGTH_SHORT).show();
+                        atpCnt1.setText(Integer.toString(atpCnt));
 
                         if (atpCnt == 0) {
                             login.setEnabled(false);
+                            Toast.makeText(Login.this, "Restart the app and try to login again",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -76,6 +89,20 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+    public void showPass(){
+        show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
+    }
+
 
     public void onBackPressed()
     {

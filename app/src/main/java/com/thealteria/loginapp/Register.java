@@ -44,7 +44,7 @@ public class Register extends AppCompatActivity {
         // check if both password matches
         if(!pass.getText().toString().equals(cnfrmpass.getText().toString()))
         {
-            Toast.makeText(getApplicationContext(), "Confirm Password does not match", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
         }
         else {
             dbHelper.addUser(name.getText().toString(),
