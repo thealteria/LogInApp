@@ -1,6 +1,8 @@
 package com.thealteria.loginapp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.renderscript.ScriptGroup;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,8 @@ public class Register extends AppCompatActivity {
 
     TextInputEditText name, user1, pass, cnfrmpass;
     Button signin;
+    Cursor cursor;
+    SQLiteDatabase db;
     DBHelper dbHelper;
 
     @Override
@@ -34,18 +38,20 @@ public class Register extends AppCompatActivity {
 
     public void signinBtn(View view) {
 
-        if(name.getText().toString().equals("")||
+       if(name.getText().toString().equals("")||
         user1.getText().toString().equals("")||
                 pass.getText().toString().equals("")||cnfrmpass.getText().toString().equals(""))
         {
             Toast.makeText(getApplicationContext(), "Please Enter Your Details", Toast.LENGTH_LONG).show();
             return;
         }
+
         // check if both password matches
         if(!pass.getText().toString().equals(cnfrmpass.getText().toString()))
         {
             Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
         }
+
         else {
             dbHelper.addUser(name.getText().toString(),
                     user1.getText().toString(), pass.getText().toString(),
