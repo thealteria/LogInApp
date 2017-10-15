@@ -109,7 +109,9 @@ public class Login extends AppCompatActivity {
         k++;
         if(k == 1)
         {
-            Toast.makeText(Login.this, "Press again to Exit.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, "Press again to to go back.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
         }
         else
         {

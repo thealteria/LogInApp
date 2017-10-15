@@ -1,5 +1,6 @@
 package com.thealteria.loginapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 public class LoginMainPage extends AppCompatActivity {
 
-    Button view;
+    Button view, logo;
     int k = 0;
     DBHelper dbHelper;
     TextView show;
@@ -26,6 +27,7 @@ public class LoginMainPage extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         view = (Button)findViewById(R.id.view);
+        logo = (Button) findViewById(R.id.logout);
         show = (TextView)findViewById(R.id.showAll);
         user = (EditText)findViewById(R.id.user);
         pass = (EditText)findViewById(R.id.password);
@@ -49,7 +51,35 @@ public class LoginMainPage extends AppCompatActivity {
                 }
             }
         });
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(LoginMainPage.this);
+                builder.setTitle("Info");
+                builder.setMessage("Do you want to logout ??");
+                builder.setPositiveButton("Yes I'm sure", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Intent intent = new Intent(LoginMainPage.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+            }
+        });
+
+                builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
+
 
     public void onBackPressed()
     {
