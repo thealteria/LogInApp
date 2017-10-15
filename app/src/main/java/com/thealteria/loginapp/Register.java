@@ -38,13 +38,6 @@ public class Register extends AppCompatActivity {
 
     public void signinBtn(View view) {
 
-            Cursor c = db.rawQuery("SELECT * FROM " + DBHelper.USER_TABLE + " WHERE "
-                    + DBHelper.COLUMN_USERNAME + " = " + user1.getText().toString(), null);
-            if(c.getCount()>0)
-            {
-                Toast.makeText(getApplicationContext(), "USER ALREADY EXITS", Toast.LENGTH_LONG).show();
-            }
-
        if(name.getText().toString().equals("")||
         user1.getText().toString().equals("")||
                 pass.getText().toString().equals("")||cnfrmpass.getText().toString().equals(""))
