@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
-            android:text="SLogin"
+            android:text="LogInApp"
             android:textColor="#000"
             android:textSize="50dp"
             android:textStyle="bold" />
