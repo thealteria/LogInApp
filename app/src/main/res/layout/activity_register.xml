@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical"
     tools:context="com.thealteria.loginapp.Register">
 
@@ -15,40 +15,49 @@
         android:layout_marginTop="25dp"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/name"
+            android:background="@drawable/etstyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="25dp"
             android:hint="Name"
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/user"
+            android:background="@drawable/etstyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="25dp"
             android:hint="Username"
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/password"
+            android:background="@drawable/etstyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="25dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true" />
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/cnfrmpassword"
+            android:background="@drawable/etstyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="25dp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:maxLines="1"
@@ -56,10 +65,11 @@
 
         <Button
             android:id="@+id/signin"
+            android:textColor="#fff"
+            android:background="@drawable/btnstylesel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button1"
+            android:layout_marginTop="25dp"
             android:onClick="signinBtn"
             android:text="Sign In" />
 

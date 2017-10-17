@@ -19,7 +19,7 @@ import org.w3c.dom.Text;
 
 public class Login extends AppCompatActivity {
 
-    TextInputEditText username1, pass;
+    EditText username1, pass;
     Button login;
     Cursor cursor;
     TextView attempt, atpCnt1;
@@ -36,8 +36,8 @@ public class Login extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
 
-        username1 = (TextInputEditText) findViewById(R.id.luser);
-        pass = (TextInputEditText) findViewById(R.id.lpass);
+        username1 = (EditText) findViewById(R.id.luser);
+        pass = (EditText) findViewById(R.id.lpass);
         show = (CheckBox) findViewById(R.id.showPass);
         attempt = (TextView)findViewById(R.id.attempt);
         atpCnt1 = (TextView)findViewById(R.id.attemptCount);

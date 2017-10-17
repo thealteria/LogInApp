@@ -21,8 +21,9 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="#fff"
             android:layout_gravity="center"
-            android:background="@drawable/button1"
+            android:background="@drawable/btnstylesel"
             android:text="Log In" />
 
     </LinearLayout>
@@ -31,6 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OR"
+        android:textStyle="bold"
+        android:textColor="#000"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
@@ -44,7 +47,8 @@
             android:id="@+id/regis"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/button1"
+            android:textColor="#fff"
+            android:background="@drawable/btnstylesel"
             android:text="Register" />
 
     </LinearLayout>

@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
-    TextInputEditText name, user1, pass, cnfrmpass;
+    EditText name, user1, pass, cnfrmpass;
     Button signin;
     Cursor cursor;
     SQLiteDatabase db;
@@ -29,10 +29,10 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         dbHelper = new DBHelper(this);
 
-        name = (TextInputEditText) findViewById(R.id.name);
-        pass = (TextInputEditText) findViewById(R.id.password);
-        cnfrmpass = (TextInputEditText) findViewById(R.id.cnfrmpassword);
-        user1 = (TextInputEditText) findViewById(R.id.user);
+        name = (EditText) findViewById(R.id.name);
+        pass = (EditText) findViewById(R.id.password);
+        cnfrmpass = (EditText) findViewById(R.id.cnfrmpassword);
+        user1 = (EditText) findViewById(R.id.user);
         signin = (Button) findViewById(R.id.signin);
     }
 
