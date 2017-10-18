@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:orientation="vertical"
     tools:context="com.thealteria.loginapp.Register">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16sp"
-        android:layout_marginLeft="16sp"
-        android:layout_marginRight="16sp"
-        android:layout_marginBottom="16sp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/rlay"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/textView2"
@@ -68,31 +70,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:clickable="true"
             android:text="Log In" />
 
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignBottom="@id/rlay"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:text="                                                                                                              "
+            android:background="@drawable/textline"/>
 
-            <TextView
-                android:id="@+id/attempt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Attempts:"
-                android:textColor="#000000"
-                android:textSize="28dp" />
 
-            <TextView
-                android:id="@+id/attemptCount"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="#000000"
-                android:textSize="28sp" />
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regis"
+            android:paddingTop="8dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:text="Don't have account? Sign up."/>
 
     </LinearLayout>
 

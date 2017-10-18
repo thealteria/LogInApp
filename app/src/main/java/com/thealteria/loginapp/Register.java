@@ -3,24 +3,25 @@ package com.thealteria.loginapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.renderscript.ScriptGroup;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
     EditText name, user1, pass, cnfrmpass;
     Button signin;
+    ImageView rback;
     Cursor cursor;
     SQLiteDatabase db;
+    CheckBox rshow;
     DBHelper dbHelper;
 
     @Override
@@ -33,7 +34,20 @@ public class Register extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.password);
         cnfrmpass = (EditText) findViewById(R.id.cnfrmpassword);
         user1 = (EditText) findViewById(R.id.user);
+        rshow = (CheckBox) findViewById(R.id.rshowPass);
         signin = (Button) findViewById(R.id.signin);
+        rback = (ImageView) findViewById(R.id.rback);
+
+        showPass();
+
+        rback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void signinBtn(View view) {
@@ -52,6 +66,8 @@ public class Register extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
         }
 
+
+
         else {
             dbHelper.addUser(name.getText().toString(),
                     user1.getText().toString(), pass.getText().toString(),
@@ -63,5 +79,27 @@ public class Register extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    public void showPass(){
+        rshow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    cnfrmpass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    cnfrmpass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
+    }
+
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(Register.this, Login.class);
+        startActivity(intent);
+        finish();
     }
 }

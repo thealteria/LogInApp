@@ -3,14 +3,8 @@ package com.thealteria.loginapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.EditText;
-
-import static android.R.attr.id;
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Aman on 9/18/2017.

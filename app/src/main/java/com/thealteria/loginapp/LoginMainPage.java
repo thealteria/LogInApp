@@ -62,7 +62,7 @@ public class LoginMainPage extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Intent intent = new Intent(LoginMainPage.this,MainActivity.class);
+                        Intent intent = new Intent(LoginMainPage.this, Login.class);
                         startActivity(intent);
                         finish();
             }
