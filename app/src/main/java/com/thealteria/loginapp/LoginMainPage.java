@@ -57,7 +57,7 @@ public class LoginMainPage extends AppCompatActivity {
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(LoginMainPage.this);
                 builder.setTitle("Info");
-                builder.setMessage("Do you want to logout ??");
+                builder.setMessage("Are you sure you want to logout ??");
                 builder.setPositiveButton("Yes I'm sure", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

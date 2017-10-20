@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity {
 
         showPass();
 
+
         rback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

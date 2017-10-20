@@ -72,12 +72,12 @@ public class Login extends AppCompatActivity {
                     if (cursor.getCount() > 0) {
                         cursor.moveToFirst();
 
-                        Toast.makeText(Login.this, "Login ho gya bc!",
+                        Toast.makeText(Login.this, "Logged In succesfully!",
                                 Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(Login.this, LoginMainPage.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(Login.this, "Login ni hua bc!",
+                        Toast.makeText(Login.this, "Invalid username or password!",
                                 Toast.LENGTH_SHORT).show();
 
                     }
